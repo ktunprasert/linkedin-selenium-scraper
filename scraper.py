@@ -82,26 +82,28 @@ class LinkedInScraper:
         ).text.strip()
 
         company_element = soup.find(
-            "a", {"class": "jobs-unified-top-card__company-name"}
+            "div", {"class": "jobs-unified-top-card__primary-description"}
         )
 
-        job_company = company_element.text.strip() if company_element else ""
-        job_company_url = company_element.get("href") if company_element else ""
-        salary_element = soup.find(
-            "a", {"href": "#SALARY"}
+        job_company = company_element.find("a").text.strip() if company_element else ""
+        job_company_url = (
+            company_element.find("a").get("href") if company_element else ""
         )
+        salary_element = soup.find("a", {"href": "#SALARY"})
         salary = salary_element.text.strip() if salary_element else ""
-        job_level = salary_element.find_next_sibling("span").text.strip()
-        job_description = soup.find(
-            "div", {"id": "job-details"}
-        ).find("span").text.strip()
+        job_description = (
+            soup.find("div", {"id": "job-details"}).find("span").text.strip()
+        )
+
+        applicant_el = soup.find("span", "jobs-unified-top-card__applicant-count")
+        applicant_count = applicant_el.text.strip() if applicant_el else ""
 
         job_data = {
             "job_title": job_title,
             "job_company": job_company,
-            "job_company_url": job_company_url,
+            "job_company_url": "https://linkedin.com" + job_company_url,
             "salary": salary,
-            "job_level": job_level,
+            "no_of_applicants": applicant_count,
             "job_description": job_description,
         }
 
