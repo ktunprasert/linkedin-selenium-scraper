@@ -67,7 +67,7 @@ class LinkedInScraper:
             except Exception as e:
                 print("Error scraping job details: " + e.__str__())
                 continue
-            jobs.append({"title": job_title, "url": job_link, **job_data})
+            jobs.append({"title": job_title, "url": f"https://linkedin.com{job_link}", **job_data})
         return jobs
 
     def scrape_job_details(self, job_url) -> dict:
@@ -100,8 +100,8 @@ class LinkedInScraper:
 
         job_data = {
             "job_title": job_title,
-            "job_company": job_company,
-            "job_company_url": f"https://linkedin.com{job_company_url}",
+            "company": job_company,
+            "company_url": f"https://linkedin.com{job_company_url}",
             "salary": salary,
             "no_of_applicants": applicant_count,
             "job_description": job_description,
