@@ -30,6 +30,7 @@ class LinkedInScraper:
         options.add_argument("--disable-dev-shm-usage")
         options.add_argument("--no-sandbox")
         options.add_argument("--headless")
+        options.add_argument("--window-size=1080,3840")
         self.driver = webdriver.Chrome(
             # service=Service(executable_path=self.chromedriver_path),
             options=options,
@@ -52,6 +53,8 @@ class LinkedInScraper:
             f.write(self.driver.page_source)
         soup = BeautifulSoup(self.driver.page_source, "html.parser")
         job_listings = soup.find_all("li", {"class": "jobs-search-results__list-item"})
+
+        print("Found " + len(job_listings) + " jobs")
         jobs = []
         for job in job_listings:
             try:
@@ -61,7 +64,8 @@ class LinkedInScraper:
                 job_link = job.find("a", {"class": "job-card-list__title"}).get("href")
                 job_link = str(job_link).split("?")[0]
                 job_data = self.scrape_job_details(job_link)
-            except:
+            except Exception as e:
+                print("Error scraping job details: " + e.__str__())
                 continue
             jobs.append(
                 {
@@ -72,8 +76,8 @@ class LinkedInScraper:
         return jobs
 
     def scrape_job_details(self, job_url) -> dict:
-        print("Scraping job details... for " + job_url)
-        self.driver.get(f"https://linkedin.com/{job_url}")
+        print("Scraping job details for " + job_url)
+        self.driver.get(f"https://linkedin.com{job_url}")
         time.sleep(1)
         with open("job_source.html", "w") as f:
             f.write(self.driver.page_source)
