@@ -37,19 +37,19 @@ The script will start a Chrome browser in headless mode, log in to LinkedIn usin
 
 The script will print a list of dictionaries, where each dictionary represents a job listing. Each job listing contains the following information:
 
--     title: The job title.
--     url: The URL of the job listing.
--     job_title: The job title (duplicated for convenience).
--     job_company: The company offering the job.
--     job_company_url: The URL of the company's LinkedIn page.
--     salary: The salary information (if available).
--     no_of_applicants: The number of applicants for the job (if available).
--     job_description: The job description.
+- title: The job title.
+- url: The URL of the job listing.
+- job_title: The job title (duplicated for convenience).
+- job_company: The company offering the job.
+- job_company_url: The URL of the company's LinkedIn page.
+- salary: The salary information (if available).
+- no_of_applicants: The number of applicants for the job (if available).
+- job_description: The job description.
 
 ## Notes
 
--     This script uses web scraping techniques to extract data from LinkedIn. Make sure to comply with LinkedIn's terms of service and use the script responsibly.
--     The script relies on the Chrome browser and ChromeDriver to interact with the LinkedIn website. Ensure that you have Chrome installed and the ChromeDriver executable compatible with your Chrome version.
--     The script may require adjustments if LinkedIn modifies its website structure.
+- This script uses web scraping techniques to extract data from LinkedIn. Make sure to comply with LinkedIn's terms of service and use the script responsibly.
+- The script relies on the Chrome browser and ChromeDriver to interact with the LinkedIn website. Ensure that you have Chrome installed and the ChromeDriver executable compatible with your Chrome version.
+- The script may require adjustments if LinkedIn modifies its website structure.
 
 If you have any questions or encounter any issues, please feel free to ask.
