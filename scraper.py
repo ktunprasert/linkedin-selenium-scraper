@@ -54,7 +54,7 @@ class LinkedInScraper:
         soup = BeautifulSoup(self.driver.page_source, "html.parser")
         job_listings = soup.find_all("li", {"class": "jobs-search-results__list-item"})
 
-        print("Found " + len(job_listings) + " jobs")
+        print(f"Found {len(job_listings)} jobs")
         jobs = []
         for job in job_listings:
             try:
@@ -101,7 +101,7 @@ class LinkedInScraper:
         job_data = {
             "job_title": job_title,
             "job_company": job_company,
-            "job_company_url": "https://linkedin.com" + job_company_url,
+            "job_company_url": f"https://linkedin.com{job_company_url}",
             "salary": salary,
             "no_of_applicants": applicant_count,
             "job_description": job_description,
